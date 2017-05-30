@@ -1,11 +1,14 @@
+# yet to be added -> AI , display current fragment before guess , display rounds played and guesses. , Respond to players by name, use optional(and default) dictionaries.
+
 class Game
   attr_reader :dictionary
-  attr_accessor :players , :fragment, :counter
+  attr_accessor :players , :fragment, :counter , :rounds
   def initialize(p1,p2)
     @fragment=''
     @players=[Player.new(p1),p2 = Player.new(p2)]
     @dictionary=File.readlines('dictionary.txt').map(&:chomp)
     @counter = 0
+    @rounds=0
   end
 
   def play_round(guess)
@@ -38,6 +41,7 @@ class Game
     if @dictionary.any? { |word| word == @fragment }
       puts "Game Over. #{current_player} loses."
       @fragment = ""
+      @rounds+=1
     end
 
   end
